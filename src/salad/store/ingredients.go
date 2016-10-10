@@ -3,7 +3,7 @@ package store
 import (
 	"fmt"
 	"math/rand"
-	"bytes"
+	"strings"
 )
 
 var INGREDIENTS = IngredientList{
@@ -72,12 +72,10 @@ func (il *IngredientList) List(category string) []string {
 }
 
 func (il *IngredientList) String() string {
-	var buf bytes.Buffer
+	var lines []string
 	for cat := range(*il) {
-		buf.WriteString(fmt.Sprintf("%v:\n", cat))
-		for _, ing := range(il.List(cat)) {
-			buf.WriteString(fmt.Sprintf("  %v\n", ing))
-		}
+		line := fmt.Sprintf("%v: %v", cat, strings.Join(il.List(cat), ", "))
+		lines = append(lines, line)
 	}
-	return buf.String()
+	return strings.Join(lines, "\n")
 }
