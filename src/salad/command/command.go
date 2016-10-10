@@ -20,7 +20,7 @@ func ParseCommandLine(cmd string) (string, []string) {
 var COMMANDS = map[string]func([]string) string {
 	"help": HelpCmd,
 	"aide": HelpCmd,
-	"salade": SaladCmd,
+	"surprise": SaladCmd,
 	"ingredients": IngredientsCmd,
 	"ajouter": AddIngredientCmd,
 	"enlever": RemoveIngredientCmd,
@@ -28,7 +28,12 @@ var COMMANDS = map[string]func([]string) string {
 
 
 func HelpCmd(args []string) string {
-	return "Help!"
+	return "Usage:\n" +
+	"surprise [[n] catégorie]...: crée une salade surprise avec les catégories d'ingrédients demandées\n" +
+	"  ex. surprise base 2 vert 2 bleu sauce extra\n" +
+	"ingredients: liste les ingrédients disponibles\n" +
+	"ajouter <catégorie> <ingrédient>: ajoute un ingrédient à la catégorie\n" +
+	"enlever <catégorie> <ingrédient>: l'inverse de la commande précédente"
 }
 
 
