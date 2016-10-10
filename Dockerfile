@@ -4,4 +4,4 @@ ADD vendor/src /go/src
 ADD src /go/src
 RUN go install ./...
 
-CMD ["/go/bin/bot"]
+CMD ["/go/bin/salad", "--daemon"]
