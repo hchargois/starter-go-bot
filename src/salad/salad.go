@@ -22,6 +22,7 @@ func startServer() {
 
 	http.HandleFunc("/", func (w http.ResponseWriter, req *http.Request) {
 		cmd := req.PostFormValue("text")
+		w.Header()["Content-Type"] = []string{"application/json"}
 		jsonData := make(map[string]string)
 		jsonData["response_type"] = "in_channel"
 		jsonData["text"] = command.ExecuteCommandLine(cmd)
