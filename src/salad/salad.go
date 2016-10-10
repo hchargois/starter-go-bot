@@ -7,10 +7,10 @@ import (
 	"fmt"
 	"math/rand"
 	"os"
-	"io"
 	"net/http"
 	"log"
 	"strings"
+	"encoding/json"
 )
 
 func startServer() {
@@ -22,7 +22,11 @@ func startServer() {
 
 	http.HandleFunc("/", func (w http.ResponseWriter, req *http.Request) {
 		cmd := req.PostFormValue("text")
-		io.WriteString(w, command.ExecuteCommandLine(cmd))
+		jsonData := make(map[string]string)
+		jsonData["response_type"] = "in_channel"
+		jsonData["text"] = command.ExecuteCommandLine(cmd)
+		jsonBytes, _ := json.Marshal(jsonData)
+		w.Write(jsonBytes)
 	})
 	addressPort := address + ":" + port
 
